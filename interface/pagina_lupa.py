@@ -153,14 +153,36 @@ class PaginaLupa(QWidget):
         self.zoom_label.setText(f"{ZOOM_LEVELS[self.zoom_index]:.2f}×")
         self.mode_label.setText(NOMES[MODOS[self.mode_index]])
 
+    def _gpio_toggle_freeze(self):
+        self.freeze_button.toggle()
+        self.toggle_freeze()
+
+    def _gpio_toggle_guide(self):
+        self.guide_button.toggle()
+        self.toggle_guide()
+
+    def _gpio_toggle_fullscreen(self):
+        janela = self.window()
+        if hasattr(janela, "toggle_fullscreen"):
+            janela.toggle_fullscreen()
+
     def ler_gpio(self):
         action = self.botoes_gpio.ler()
         actions = {
-            Acao.ZOOM_MAIS: self.zoom_in, Acao.ZOOM_MENOS: self.zoom_out,
-            Acao.ESQUERDA: lambda: self.pan(-PAN_STEP, 0), Acao.DIREITA: lambda: self.pan(PAN_STEP, 0),
-            Acao.CIMA: lambda: self.pan(0, -PAN_STEP), Acao.BAIXO: lambda: self.pan(0, PAN_STEP),
-            Acao.CENTRALIZAR: self.center, Acao.PROXIMO_MODO: self.next_mode,
+            Acao.ZOOM_MAIS: self.zoom_in,
+            Acao.ZOOM_MENOS: self.zoom_out,
+            Acao.ESQUERDA: lambda: self.pan(-PAN_STEP, 0),
+            Acao.DIREITA: lambda: self.pan(PAN_STEP, 0),
+            Acao.CIMA: lambda: self.pan(0, -PAN_STEP),
+            Acao.BAIXO: lambda: self.pan(0, PAN_STEP),
+            Acao.CENTRALIZAR: self.center,
+            Acao.PROXIMO_MODO: self.next_mode,
+            Acao.FREEZE: self._gpio_toggle_freeze,
+            Acao.GUIA_LEITURA: self._gpio_toggle_guide,
+            Acao.CAPTURAR: self.save_capture,
+            Acao.FULLSCREEN: self._gpio_toggle_fullscreen,
+            Acao.SAIR: self.window().close,
         }
-        if action == Acao.FREEZE:
-            self.freeze_button.toggle(); self.toggle_freeze()
-        elif action in actions: actions[action]()
+        callback = actions.get(action)
+        if callback:
+            callback()
