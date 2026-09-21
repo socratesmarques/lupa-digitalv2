@@ -49,6 +49,60 @@ env LUPA_CAMERA=/dev/video2 /caminho/lupa-digital/.venv/bin/python /caminho/lupa
 Também existem `LUPA_WIDTH`, `LUPA_HEIGHT`, `LUPA_FPS` e `LUPA_FULLSCREEN`
 (`1` ou `0`). O padrão ARM é 640×480 a 24 FPS para reduzir travamentos.
 
+## Configurar o joystick GPIO
+
+A configuração do joystick fica em:
+
+```text
+config/joystick.py
+```
+
+O projeto usa `wiringPiSetupPhys()`, então os números são os **pinos físicos**
+do conector GPIO do Orange Pi.
+
+Exemplo:
+
+```python
+JOYSTICK_PIN_KEYS = {
+    11: "UP",
+    13: "RIGHT",
+    15: "DOWN",
+    16: "LEFT",
+    24: "-",
+    22: "+",
+    18: "SPACE",
+}
+```
+
+Para mudar a função de um botão, altere apenas o valor à direita. Por exemplo,
+para fazer o pino físico 18 salvar uma captura:
+
+```python
+18: "S",
+```
+
+Teclas aceitas:
+
+| Tecla configurada | Ação |
+|---|---|
+| `UP` | mover para cima |
+| `DOWN` | mover para baixo |
+| `LEFT` | mover para esquerda |
+| `RIGHT` | mover para direita |
+| `+` ou `PLUS` | aumentar zoom |
+| `-` ou `MINUS` | diminuir zoom |
+| `SPACE` | congelar / retomar |
+| `ENTER` ou `C` | centralizar |
+| `F` | trocar modo de leitura |
+| `S` | salvar captura |
+| `G` | ativar / desativar guia de leitura |
+| `F11` | alternar tela cheia |
+| `ESC` | fechar a aplicação |
+| `NONE` | desativar o pino |
+
+Também é possível alterar `DEBOUNCE_MS` em `config/joystick.py` para ajustar a
+sensibilidade contra cliques repetidos.
+
 ## Atalhos
 
 | Tecla | Função |
