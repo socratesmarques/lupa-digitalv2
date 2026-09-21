@@ -1,0 +1,3 @@
+# Use um venv com --system-site-packages após instalar python3-opencv pelo apt.
+numpy>=1.24,<3
+PySide6>=6.5,<7
