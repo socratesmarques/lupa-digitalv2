@@ -8,7 +8,7 @@ import cv2
 
 
 class Camera:
-    def __init__(self, device=0, width: int = 640, height: int = 480, fps: int = 24,
+    def __init__(self, device=0, width: int = 1280, height: int = 720, fps: int = 24,
                  buffer_size: int = 1, prefer_mjpg: bool = True, index=None):
         if index is not None:
             device = index
