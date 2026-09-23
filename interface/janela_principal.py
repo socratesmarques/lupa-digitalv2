@@ -2,6 +2,7 @@
 from PySide6.QtGui import QKeySequence, QShortcut
 from PySide6.QtWidgets import QFrame, QHBoxLayout, QLabel, QMainWindow, QPushButton, QVBoxLayout, QWidget
 
+from config.settings import PAN_STEP
 from interface.pagina_lupa import PaginaLupa
 from interface.tema import TEMA
 
@@ -25,6 +26,10 @@ class JanelaPrincipal(QMainWindow):
         self._shortcut("Escape", self.leave_fullscreen)
         self._shortcut("+", self.page.zoom_in)
         self._shortcut("-", self.page.zoom_out)
+        self._shortcut("Left", lambda: self.page.pan(-PAN_STEP, 0))
+        self._shortcut("Right", lambda: self.page.pan(PAN_STEP, 0))
+        self._shortcut("Up", lambda: self.page.pan(0, -PAN_STEP))
+        self._shortcut("Down", lambda: self.page.pan(0, PAN_STEP))
         self._shortcut("Space", self._keyboard_freeze)
         self._shortcut("F", self.page.next_mode)
         self._shortcut("S", self.page.save_capture)
