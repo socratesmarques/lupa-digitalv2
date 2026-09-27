@@ -1,5 +1,5 @@
 # Lupa Digital V2 — Orange Pi 3 LTS
-
+Prox atualizacao: V3
 Aplicação reescrita em **PySide6 + OpenCV**, baseada na estrutura de câmera e
 interface usada no projeto `deteccao-facial`. Não usa mais `cv2.imshow()`.
 
