@@ -12,8 +12,8 @@ SCREENSHOT_DIR = BASE_DIR / "capturas"
 
 IS_ARM = platform.machine().lower() in {"aarch64", "arm64", "armv7l"}
 CAMERA_DEVICE = os.getenv("LUPA_CAMERA", "auto")
-CAMERA_WIDTH = int(os.getenv("LUPA_WIDTH", "640" if IS_ARM else "1280"))
-CAMERA_HEIGHT = int(os.getenv("LUPA_HEIGHT", "480" if IS_ARM else "720"))
+CAMERA_WIDTH = int(os.getenv("LUPA_WIDTH", "1280"))
+CAMERA_HEIGHT = int(os.getenv("LUPA_HEIGHT", "720"))
 CAMERA_FPS = int(os.getenv("LUPA_FPS", "24" if IS_ARM else "30"))
 CAMERA_BUFFER_SIZE = 1
 PREFER_MJPG = True
